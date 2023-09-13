@@ -1,0 +1,50 @@
+{
+  "name": "packager",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/packager/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/packager",
+        "main": "packages/packager/src/index.ts",
+        "tsConfig": "packages/packager/tsconfig.lib.json",
+        "assets": [
+          "packages/packager/*.md",
+          "packages/packager/src/lib/runtime.js"
+        ]
+      }
+    },
+    "publish": {
+      "command": "node tools/scripts/publish.mjs packager {args.ver} {args.tag}",
+      "dependsOn": ["build"]
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "packages/packager/**/*.ts",
+          "packages/packager/package.json"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "packages/packager/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": []
+}
