@@ -10,6 +10,7 @@
     "@nx/js": "^16.8.1",
     "@nx/linter": "16.8.1",
     "@types/jest": "^29.4.0",
+    "@types/lodash": "^4.14.198",
     "@types/node": "18.7.1",
     "@typescript-eslint/eslint-plugin": "^5.60.1",
     "@typescript-eslint/parser": "^5.60.1",
@@ -31,6 +32,7 @@
   "dependencies": {
     "@vendia/serverless-express": "^4.10.4",
     "@vulcan-sql/serve": "*",
+    "lodash": "^4.17.21",
     "tslib": "^2.3.0"
   },
   "nx": {

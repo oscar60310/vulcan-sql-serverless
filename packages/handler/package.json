@@ -2,9 +2,14 @@
   "name": "@vulcan-sql-lambda/handler",
   "version": "0.0.1",
   "dependencies": {
+    "@vendia/serverless-express": "^4.10.4",
     "tslib": "^2.3.0"
   },
   "type": "commonjs",
   "main": "./src/index.js",
-  "typings": "./src/index.d.ts"
+  "typings": "./src/index.d.ts",
+  "peerDependencies": {
+    "@vulcan-sql/serve": "*",
+    "@vulcan-sql/core": "*"
+  }
 }

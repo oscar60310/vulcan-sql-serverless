@@ -5,6 +5,8 @@ import {
 } from '@vulcan-sql/core';
 import * as path from 'path';
 import { promises as fs } from 'fs';
+import { version } from '../../package.json';
+import { mapValues } from 'lodash';
 
 @VulcanExtensionId('lambda_vulcan-server')
 export class LambdaPackager extends Packager {
@@ -26,7 +28,7 @@ export class LambdaPackager extends Packager {
     // config.json (vulcan config)
     await fs.writeFile(
       path.resolve(distFolder, 'config.json'),
-      JSON.stringify(option),
+      JSON.stringify(this.removePackagerExtension(option)),
       'utf-8'
     );
     // entrypoint
@@ -44,8 +46,19 @@ export class LambdaPackager extends Packager {
         path.resolve(distFolder, option.artifact.filePath)
       );
     }
-    this.logger.info(
-      `QQQPackage successfully, you can go to "${folderPath}" folder and run "npm install && node index.js" to start the server`
-    );
+    this.logger.info(`Package successfully.`);
+  }
+
+  protected override async getPackageJson(): Promise<Record<string, any>> {
+    const packageJson = await super.getPackageJson();
+    packageJson['dependencies']['@vulcan-sql-lambda/handler'] = `^${version}`;
+    return packageJson;
+  }
+
+  private removePackagerExtension(options: any) {
+    const extensions = mapValues({ ...(options.extensions || {}) }, (value) => {
+      return value === '@vulcan-sql-lambda/packager' ? undefined : value;
+    });
+    return { ...options, extensions };
   }
 }

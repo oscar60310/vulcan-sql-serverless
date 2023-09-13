@@ -15,7 +15,7 @@
       }
     },
     "publish": {
-      "command": "node tools/scripts/publish.mjs server {args.ver} {args.tag}",
+      "command": "node tools/scripts/publish.mjs handler {args.ver} {args.tag}",
       "dependsOn": ["build"]
     },
     "lint": {
