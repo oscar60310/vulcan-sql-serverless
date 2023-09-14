@@ -15,8 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@vulcan-sql-lambda/packager": ["packages/packager/src/index.ts"],
-      "@vulcan-sql-lambda/handler": ["packages/handler/src/index.ts"]
+      "@vulcan-sql-serverless/packager": ["packages/packager/src/index.ts"],
+      "@vulcan-sql-serverless/handler": ["packages/handler/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

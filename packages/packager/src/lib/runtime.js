@@ -1,16 +1,16 @@
-const { VulcanLambdaHandler } = require('@vulcan-sql-lambda/handler');
+const { VulcanServerlessHandler } = require('@vulcan-sql-serverless/handler');
 const { promises: fs } = require('fs');
 
-let vulcanLambdaHandler;
+let vulcanServerlessHandler;
 
 async function handler(event, context) {
-  if (!vulcanLambdaHandler) {
+  if (!vulcanServerlessHandler) {
     const config = JSON.parse(await fs.readFile('config.json', 'utf-8'));
-    vulcanLambdaHandler = new VulcanLambdaHandler(config);
-    await vulcanLambdaHandler.init();
+    vulcanServerlessHandler = new VulcanServerlessHandler(config);
+    await vulcanServerlessHandler.init();
   }
 
-  return vulcanLambdaHandler.handler(event, context);
+  return vulcanServerlessHandler.handler(event, context);
 }
 
 exports.handler = handler;

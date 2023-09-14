@@ -8,8 +8,8 @@ import { promises as fs } from 'fs';
 import { version } from '../../package.json';
 import { mapValues } from 'lodash';
 
-@VulcanExtensionId('lambda_vulcan-server')
-export class LambdaPackager extends Packager {
+@VulcanExtensionId('serverless_vulcan-server')
+export class ServerlessPackager extends Packager {
   private logger = this.getLogger();
   private readonly target = PackagerTarget.VulcanServer;
 
@@ -51,13 +51,15 @@ export class LambdaPackager extends Packager {
 
   protected override async getPackageJson(): Promise<Record<string, any>> {
     const packageJson = await super.getPackageJson();
-    packageJson['dependencies']['@vulcan-sql-lambda/handler'] = `^${version}`;
+    packageJson['dependencies'][
+      '@vulcan-sql-serverless/handler'
+    ] = `^${version}`;
     return packageJson;
   }
 
   private removePackagerExtension(options: any) {
     const extensions = mapValues({ ...(options.extensions || {}) }, (value) => {
-      return value === '@vulcan-sql-lambda/packager' ? undefined : value;
+      return value === '@vulcan-sql-serverless/packager' ? undefined : value;
     });
     return { ...options, extensions };
   }

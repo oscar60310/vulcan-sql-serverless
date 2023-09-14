@@ -1,5 +1,5 @@
 {
-  "name": "@vulcan-sql-lambda/handler",
+  "name": "@vulcan-sql-serverless/handler",
   "version": "0.0.1",
   "dependencies": {
     "@vendia/serverless-express": "^4.10.4",

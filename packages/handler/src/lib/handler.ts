@@ -17,7 +17,7 @@ import {
 
 const logger = getLogger({ scopeName: 'SERVE' });
 
-export class VulcanLambdaHandler {
+export class VulcanServerlessHandler {
   private config: ServeConfig;
   private container: Container;
   private instance: any;
