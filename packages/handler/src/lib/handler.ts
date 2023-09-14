@@ -6,6 +6,7 @@ import {
   BuiltInArtifactKeys,
   APISchema,
   ArtifactBuilder,
+  DataSource,
 } from '@vulcan-sql/core';
 import {
   APIProviderType,
@@ -51,6 +52,15 @@ export class VulcanServerlessHandler {
     );
     for (const templateName in templates) {
       codeLoader.setSource(templateName, templates[templateName]);
+    }
+
+    // Activate data sources
+    const dataSources =
+      this.container.getAll<DataSource>(CORE_TYPES.Extension_DataSource) || [];
+    for (const dataSource of dataSources) {
+      logger.debug(`Initializing data source: ${dataSource.getExtensionId()}`);
+      await dataSource.activate();
+      logger.debug(`Data source ${dataSource.getExtensionId()} initialized`);
     }
 
     const app = this.container.get<VulcanApplication>(TYPES.VulcanApplication);
