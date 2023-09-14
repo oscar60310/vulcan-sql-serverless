@@ -7,6 +7,7 @@ import * as path from 'path';
 import { promises as fs } from 'fs';
 import { version } from '../../package.json';
 import { mapValues } from 'lodash';
+import { PACKAGE_NAME } from './constants';
 
 @VulcanExtensionId('serverless_vulcan-server')
 export class ServerlessPackager extends Packager {
@@ -51,15 +52,13 @@ export class ServerlessPackager extends Packager {
 
   protected override async getPackageJson(): Promise<Record<string, any>> {
     const packageJson = await super.getPackageJson();
-    packageJson['dependencies'][
-      '@vulcan-sql-serverless/handler'
-    ] = `^${version}`;
+    packageJson['dependencies'][`${PACKAGE_NAME}/handler`] = `^${version}`;
     return packageJson;
   }
 
   private removePackagerExtension(options: any) {
     const extensions = mapValues({ ...(options.extensions || {}) }, (value) => {
-      return value === '@vulcan-sql-serverless/packager' ? undefined : value;
+      return value === `${PACKAGE_NAME}/packager` ? undefined : value;
     });
     return { ...options, extensions };
   }

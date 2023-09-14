@@ -7,5 +7,10 @@
   },
   "type": "commonjs",
   "main": "./src/index.js",
-  "typings": "./src/index.d.ts"
+  "typings": "./src/index.d.ts",
+  "peerDependencies": {
+    "@vulcan-sql/build": "*",
+    "@vulcan-sql/core": "*",
+    "@vulcan-sql-serverless/handler": "*"
+  }
 }
