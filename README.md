@@ -1,6 +1,6 @@
 # VulcanSql Serverless
 
-Run [VulcanSQL](https://vulcansql.com/applications) on top of [AWS Lambda](https://aws.amazon.com/lambda/).
+Run [VulcanSQL](https://vulcansql.com) applications on top of [AWS Lambda](https://aws.amazon.com/lambda/).
 
 ### Quick start
 1. Install extension.
